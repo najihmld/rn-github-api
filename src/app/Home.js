@@ -16,7 +16,8 @@ class Home extends Component {
         <View style={styles.logoScreen}>
           <Image style={styles.logo} source={require('../assets/github.png')} />
           <Text style={styles.title}>
-            Please enter username github account to show all list repositories
+            Silahkan masukan username akun Github untuk menampilkan list
+            repository.
           </Text>
         </View>
         <Card>
@@ -54,7 +55,7 @@ const styles = StyleSheet.create({
   logo: {
     width: 130,
     height: 130,
-    margin: 30,
+    margin: 25,
   },
   title: {
     textAlign: 'center',
