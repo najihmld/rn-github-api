@@ -7,8 +7,10 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
-import Card from '../components/Card';
 import axios from 'axios';
+
+import Card from '../components/Card';
+import ButtonLoading from '../components/ButtonLoading';
 
 class Home extends Component {
   state = {
@@ -43,11 +45,16 @@ class Home extends Component {
             underlineColorAndroid="transparent"
             placeholder="Username"
           />
-          <TouchableOpacity onPress={() => this.getListRepo()}>
+          {/* <TouchableOpacity onPress={() => this.getListRepo()}>
             <View style={styles.button}>
               <Text style={styles.buttonText}>Next</Text>
             </View>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
+          <ButtonLoading
+            title="Next"
+            loading={true}
+            onPress={() => this.getListRepo()}
+          />
         </Card>
       </View>
     );
