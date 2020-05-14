@@ -8,8 +8,25 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import Card from '../components/Card';
+import axios from 'axios';
 
 class Home extends Component {
+  state = {
+    listRepo: [],
+  };
+  getListRepo = () => {
+    console.log('halo');
+    axios.get('https://api.github.com/users/najihmld/repos').then(res => {
+      console.log(res.status);
+
+      if (res.status === 200) {
+        this.setState({
+          listRepo: res.data,
+        });
+        console.log(this.state.listRepo);
+      }
+    });
+  };
   render() {
     return (
       <View style={styles.screen}>
@@ -26,8 +43,7 @@ class Home extends Component {
             underlineColorAndroid="transparent"
             placeholder="Username"
           />
-          <TouchableOpacity
-            onPress={() => this.props.navigation.navigate('Repo')}>
+          <TouchableOpacity onPress={() => this.getListRepo()}>
             <View style={styles.button}>
               <Text style={styles.buttonText}>Next</Text>
             </View>
