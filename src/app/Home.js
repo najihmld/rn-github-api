@@ -27,8 +27,7 @@ class Home extends Component {
               message: 'Success!',
               loading: false,
             });
-
-            console.log(this.state);
+            this.props.navigation.navigate('Repo', {data: this.state.listRepo});
           }, 1000);
         }
       })
