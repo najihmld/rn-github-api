@@ -12,12 +12,17 @@ export default class App extends Component {
   render() {
     return (
       <NavigationContainer>
-        <Stack.Navigator
-          screenOptions={{
-            headerShown: false,
-          }}>
-          <Stack.Screen name="Home" component={Home} />
-          <Stack.Screen name="Repo" component={Repo} />
+        <Stack.Navigator>
+          <Stack.Screen
+            options={{headerShown: false}}
+            name="Home"
+            component={Home}
+          />
+          <Stack.Screen
+            options={{title: 'List Repository'}}
+            name="Repo"
+            component={Repo}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     );
