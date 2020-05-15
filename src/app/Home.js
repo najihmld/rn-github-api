@@ -1,12 +1,5 @@
 import React, {Component} from 'react';
-import {
-  View,
-  Text,
-  TextInput,
-  Image,
-  StyleSheet,
-  TouchableOpacity,
-} from 'react-native';
+import {View, Text, TextInput, Image, StyleSheet} from 'react-native';
 import axios from 'axios';
 
 import Card from '../components/Card';
@@ -14,20 +7,40 @@ import ButtonLoading from '../components/ButtonLoading';
 
 class Home extends Component {
   state = {
+    loading: false,
     listRepo: [],
+    message: '',
+    username: '',
+  };
+  inputText = text => {
+    this.setState({username: text});
   };
   getListRepo = () => {
-    console.log('halo');
-    axios.get('https://api.github.com/users/najihmld/repos').then(res => {
-      console.log(res.status);
+    this.setState({loading: true});
+    axios
+      .get(`https://api.github.com/users/${this.state.username}/repos`)
+      .then(res => {
+        if (res.status === 200) {
+          setTimeout(() => {
+            this.setState({
+              listRepo: res.data,
+              message: 'Success!',
+              loading: false,
+            });
 
-      if (res.status === 200) {
-        this.setState({
-          listRepo: res.data,
-        });
-        console.log(this.state.listRepo);
-      }
-    });
+            console.log(this.state);
+          }, 1000);
+        }
+      })
+      .catch(err => {
+        setTimeout(() => {
+          this.setState({
+            message: err.response.data.message,
+            loading: false,
+          });
+          console.log(this.state);
+        }, 1000);
+      });
   };
   render() {
     return (
@@ -42,17 +55,13 @@ class Home extends Component {
         <Card>
           <TextInput
             style={styles.textInput}
+            onChangeText={text => this.inputText(text)}
             underlineColorAndroid="transparent"
             placeholder="Username"
           />
-          {/* <TouchableOpacity onPress={() => this.getListRepo()}>
-            <View style={styles.button}>
-              <Text style={styles.buttonText}>Next</Text>
-            </View>
-          </TouchableOpacity> */}
           <ButtonLoading
             title="Next"
-            loading={true}
+            loading={this.state.loading}
             onPress={() => this.getListRepo()}
           />
         </Card>
