@@ -5,6 +5,7 @@ class Repo extends Component {
   state = {
     data: this.props.route.params.data,
   };
+
   render() {
     return (
       <View style={styles.screen}>
@@ -13,8 +14,8 @@ class Repo extends Component {
           keyExtractor={item => item.id}
           renderItem={({item, index}) => {
             return (
-              <View>
-                <Text>{item.name}</Text>
+              <View style={styles.list}>
+                <Text style={styles.title}>{item.full_name}</Text>
               </View>
             );
           }}
@@ -27,7 +28,20 @@ class Repo extends Component {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    backgroundColor: 'red',
+    backgroundColor: '#f6f8fa',
+  },
+  list: {
+    elevation: 8,
+    backgroundColor: 'white',
+    paddingHorizontal: 20,
+    paddingVertical: 15,
+    minHeight: 80,
+    borderRadius: 10,
+    marginHorizontal: 30,
+    marginVertical: 10,
+  },
+  title: {
+    fontSize: 14,
   },
 });
 
